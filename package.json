@@ -28,7 +28,7 @@
     "gulp-zip": "^4.2.0",
     "jasmine": "^3.4.0",
     "jasmine-core": "^3.4.0",
-    "jsdoc": "^3.6.2",
+    "jsdoc": "^3.6.3",
     "jstransformer-markdown-it": "^2.1.0",
     "merge-stream": "^1.0.1",
     "mkdirp": "^0.5.1",
