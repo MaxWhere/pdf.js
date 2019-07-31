@@ -217,6 +217,26 @@ function webViewerLoad() {
   }
 }
 
+// MODIFIED: maxwhere input handlers
+const handlePresenterKeyInputs = event => {
+  if (event.key === 'PageUp' && event instanceof window.KeyboardEvent) {
+    // previous page
+    event.preventDefault()
+    if (window.PDFViewerApplication.page > 1) {
+      window.PDFViewerApplication.page--
+    }
+  } else if (event.key === 'PageDown' && event instanceof window.KeyboardEvent) {
+    // next page
+    event.preventDefault()
+    if (window.PDFViewerApplication.page <
+        window.PDFViewerApplication.pagesCount) {
+      window.PDFViewerApplication.page++
+    }
+  }
+}
+document.addEventListener('keydown', handlePresenterKeyInputs, false)
+// END
+
 if (document.readyState === 'interactive' ||
     document.readyState === 'complete') {
   webViewerLoad();
