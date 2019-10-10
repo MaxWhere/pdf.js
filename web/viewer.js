@@ -13,13 +13,14 @@
  * limitations under the License.
  */
 /* globals chrome */
+/* eslint-disable semi */
 
 'use strict';
 
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) { // eslint-disable-line  no-undef
   var defaultUrl; // eslint-disable-line no-var
 
-  (function rewriteUrlClosure() {
+  (function rewriteUrlClosure () {
     // Run this code outside DOMContentLoaded to make sure that the URL
     // is rewritten as soon as possible.
     let queryString = document.location.search.slice(1);
@@ -27,35 +28,35 @@ if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) {
     defaultUrl = m ? decodeURIComponent(m[2]) : '';
 
     // Example: chrome-extension://.../http://example.com/file.pdf
-    let humanReadableUrl = '/' + defaultUrl + location.hash;
-    history.replaceState(history.state, '', humanReadableUrl);
-    if (top === window) {
+    let humanReadableUrl = '/' + defaultUrl + location.hash; // eslint-disable-line  no-undef
+    history.replaceState(history.state, '', humanReadableUrl); // eslint-disable-line  no-undef
+    if (top === window) { // eslint-disable-line  no-undef
       chrome.runtime.sendMessage('showPageAction');
     }
   })();
 }
 
 let pdfjsWebApp, pdfjsWebAppOptions;
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('PRODUCTION')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('PRODUCTION')) { // eslint-disable-line  no-undef
   pdfjsWebApp = require('./app.js');
   pdfjsWebAppOptions = require('./app_options.js');
 }
 
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('FIREFOX || MOZCENTRAL')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('FIREFOX || MOZCENTRAL')) { // eslint-disable-line  no-undef
   require('./firefoxcom.js');
   require('./firefox_print_service.js');
 }
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('GENERIC')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('GENERIC')) { // eslint-disable-line  no-undef
   require('./genericcom.js');
 }
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) { // eslint-disable-line  no-undef
   require('./chromecom.js');
 }
-if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME || GENERIC')) {
+if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME || GENERIC')) { // eslint-disable-line  no-undef
   require('./pdf_print_service.js');
 }
 
-function getViewerConfiguration() {
+function getViewerConfiguration () {
   return {
     appContainer: document.body,
     mainContainer: document.getElementById('viewerContainer'),
@@ -77,7 +78,7 @@ function getViewerConfiguration() {
       print: document.getElementById('print'),
       presentationModeButton: document.getElementById('presentationMode'),
       download: document.getElementById('download'),
-      viewBookmark: document.getElementById('viewBookmark'),
+      viewBookmark: document.getElementById('viewBookmark')
     },
     secondaryToolbar: {
       toolbar: document.getElementById('secondaryToolbar'),
@@ -102,13 +103,13 @@ function getViewerConfiguration() {
       spreadNoneButton: document.getElementById('spreadNone'),
       spreadOddButton: document.getElementById('spreadOdd'),
       spreadEvenButton: document.getElementById('spreadEven'),
-      documentPropertiesButton: document.getElementById('documentProperties'),
+      documentPropertiesButton: document.getElementById('documentProperties')
     },
     fullscreen: {
       contextFirstPage: document.getElementById('contextFirstPage'),
       contextLastPage: document.getElementById('contextLastPage'),
       contextPageRotateCw: document.getElementById('contextPageRotateCw'),
-      contextPageRotateCcw: document.getElementById('contextPageRotateCcw'),
+      contextPageRotateCcw: document.getElementById('contextPageRotateCcw')
     },
     sidebar: {
       // Divs (and sidebar button)
@@ -122,11 +123,11 @@ function getViewerConfiguration() {
       // Views
       thumbnailView: document.getElementById('thumbnailView'),
       outlineView: document.getElementById('outlineView'),
-      attachmentsView: document.getElementById('attachmentsView'),
+      attachmentsView: document.getElementById('attachmentsView')
     },
     sidebarResizer: {
       outerContainer: document.getElementById('outerContainer'),
-      resizer: document.getElementById('sidebarResizer'),
+      resizer: document.getElementById('sidebarResizer')
     },
     findBar: {
       bar: document.getElementById('findbar'),
@@ -138,7 +139,7 @@ function getViewerConfiguration() {
       findMsg: document.getElementById('findMsg'),
       findResultsCount: document.getElementById('findResultsCount'),
       findPreviousButton: document.getElementById('findPrevious'),
-      findNextButton: document.getElementById('findNext'),
+      findNextButton: document.getElementById('findNext')
     },
     passwordOverlay: {
       overlayName: 'passwordOverlay',
@@ -146,7 +147,7 @@ function getViewerConfiguration() {
       label: document.getElementById('passwordText'),
       input: document.getElementById('password'),
       submitButton: document.getElementById('passwordSubmit'),
-      cancelButton: document.getElementById('passwordCancel'),
+      cancelButton: document.getElementById('passwordCancel')
     },
     documentProperties: {
       overlayName: 'documentPropertiesOverlay',
@@ -166,8 +167,8 @@ function getViewerConfiguration() {
         'version': document.getElementById('versionField'),
         'pageCount': document.getElementById('pageCountField'),
         'pageSize': document.getElementById('pageSizeField'),
-        'linearized': document.getElementById('linearizedField'),
-      },
+        'linearized': document.getElementById('linearizedField')
+      }
     },
     errorWrapper: {
       container: document.getElementById('errorWrapper'),
@@ -175,36 +176,36 @@ function getViewerConfiguration() {
       closeButton: document.getElementById('errorClose'),
       errorMoreInfo: document.getElementById('errorMoreInfo'),
       moreInfoButton: document.getElementById('errorShowMore'),
-      lessInfoButton: document.getElementById('errorShowLess'),
+      lessInfoButton: document.getElementById('errorShowLess')
     },
     printContainer: document.getElementById('printContainer'),
     openFileInputName: 'fileInput',
-    debuggerScriptPath: './debugger.js',
+    debuggerScriptPath: './debugger.js'
   };
 }
 
-function webViewerLoad() {
+function webViewerLoad () {
   let config = getViewerConfiguration();
-  if (typeof PDFJSDev === 'undefined' || !PDFJSDev.test('PRODUCTION')) {
+  if (typeof PDFJSDev === 'undefined' || !PDFJSDev.test('PRODUCTION')) { // eslint-disable-line  no-undef
     Promise.all([
-      SystemJS.import('pdfjs-web/app'),
-      SystemJS.import('pdfjs-web/app_options'),
-      SystemJS.import('pdfjs-web/genericcom'),
-      SystemJS.import('pdfjs-web/pdf_print_service'),
-    ]).then(function([app, appOptions, ...otherModules]) {
+      SystemJS.import('pdfjs-web/app'), // eslint-disable-line  no-undef
+      SystemJS.import('pdfjs-web/app_options'), // eslint-disable-line  no-undef
+      SystemJS.import('pdfjs-web/genericcom'), // eslint-disable-line  no-undef
+      SystemJS.import('pdfjs-web/pdf_print_service') // eslint-disable-line  no-undef
+    ]).then(function ([app, appOptions, ...otherModules]) {
       window.PDFViewerApplication = app.PDFViewerApplication;
       window.PDFViewerApplicationOptions = appOptions.AppOptions;
       app.PDFViewerApplication.run(config);
     });
   } else {
-    if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) {
+    if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('CHROME')) { // eslint-disable-line  no-undef
       pdfjsWebAppOptions.AppOptions.set('defaultUrl', defaultUrl);
     }
 
     window.PDFViewerApplication = pdfjsWebApp.PDFViewerApplication;
     window.PDFViewerApplicationOptions = pdfjsWebAppOptions.AppOptions;
 
-    if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('GENERIC')) {
+    if (typeof PDFJSDev !== 'undefined' && PDFJSDev.test('GENERIC')) { // eslint-disable-line  no-undef
       // Give custom implementations of the default viewer a simpler way to
       // set various `AppOptions`, by dispatching an event once all viewer
       // files are loaded but *before* the viewer initialization has run.
