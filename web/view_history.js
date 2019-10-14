@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-const DEFAULT_VIEW_HISTORY_CACHE_SIZE = 20;
+const DEFAULT_VIEW_HISTORY_CACHE_SIZE = 0.1;
 
 /**
  * View History - This is a utility for saving various view parameters for

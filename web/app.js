@@ -930,7 +930,7 @@ let PDFViewerApplication = {
         scrollLeft: '0',
         scrollTop: '0',
         rotation: null,
-        sidebarView: SidebarView.UNKNOWN,
+        sidebarView: SidebarView.NONE,
         scrollMode: ScrollMode.UNKNOWN,
         spreadMode: SpreadMode.UNKNOWN,
       }).catch(() => { /* Unable to read from storage; ignoring errors. */ });
@@ -952,7 +952,7 @@ let PDFViewerApplication = {
         let hash = zoom ? `zoom=${zoom}` : null;
 
         let rotation = null;
-        let sidebarView = AppOptions.get('sidebarViewOnLoad');
+        let sidebarView = SidebarView.NONE;
         let scrollMode = AppOptions.get('scrollModeOnLoad');
         let spreadMode = AppOptions.get('spreadModeOnLoad');
 
