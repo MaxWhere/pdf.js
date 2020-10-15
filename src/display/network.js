@@ -40,6 +40,12 @@ function getArrayBuffer(xhr) {
 class NetworkManager {
   constructor(url, args) {
     this.url = url;
+    this.hostname = () => {
+      // run against regex
+      const matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+      // extract hostname (will be null if no match is found)
+      return matches && matches[1];
+    }
     args = args || {};
     this.isHttp = /^https?:/i.test(url);
     this.httpHeaders = (this.isHttp && args.httpHeaders) || {};
@@ -84,6 +90,7 @@ class NetworkManager {
       }
       xhr.setRequestHeader(property, value);
     }
+    xhr.setRequestHeader("Origin", this.hostname());
     if (this.isHttp && 'begin' in args && 'end' in args) {
       xhr.setRequestHeader('Range', `bytes=${args.begin}-${args.end - 1}`);
       pendingRequest.expectedStatus = PARTIAL_CONTENT_RESPONSE;
